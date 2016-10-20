@@ -141,6 +141,37 @@ services:
      - "8984:8983"
      # Kafka
      - "6668:6667"
+  dn2.dev:
+    build:
+      context: ../../containers/node
+      args:
+       - AMBARI_REPO_URL=${AMBARI_REPO_URL}
+       - HDP_REPO_URL=${HDP_REPO_URL}
+    image: hdp/worker
+    privileged: true
+    networks:
+     - dev
+    hostname: dn2
+    domainname: dev
+    ports:
+     # HDFS
+     - "50072:50070"
+     - "50472:50470"
+     - "50077:50075"
+     - "50477:50475"
+     - "50012:50010"
+     - "50022:50020"
+     - "50032:50030"
+     # HBase
+     - "16022:16020"
+     - "16032:16030"
+     # Yarn
+     - "45452:45454"
+     - "8043:8042"
+     # Solr
+     - "8985:8983"
+     # Kafka
+     - "6669:6667"
 networks:
   dev:
     driver: bridge
